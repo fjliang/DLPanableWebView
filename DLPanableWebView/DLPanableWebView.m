@@ -200,10 +200,10 @@
     BOOL isHTTPOrFile = [request.URL.scheme isEqualToString:@"http"] || [request.URL.scheme isEqualToString:@"https"] || [request.URL.scheme isEqualToString:@"file"];
     if (ret && !isFragmentJump && isHTTPOrFile && isTopLevelNavigation) {
         if ((navigationType == UIWebViewNavigationTypeLinkClicked || navigationType == UIWebViewNavigationTypeOther) && [[webView.request.URL description] length]) {
-            if (![[[historyStack_ lastObject] objectForKey:@"url"] isEqualToString:[self.request.URL description]]) {
+//            if (![[[historyStack_ lastObject] objectForKey:@"url"] isEqualToString:[self.request.URL description]]) {
                 UIImage *curPreview = [DLPanableWebView screenshotOfView:self];
                 [historyStack_ addObject:@{@"preview":curPreview, @"url":[self.request.URL description]}];
-            }
+//            }
         }
     }
     return ret;
