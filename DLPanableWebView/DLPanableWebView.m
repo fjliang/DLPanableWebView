@@ -162,12 +162,8 @@
                     rc.origin.x = 0;
                     [self historyView].frame = rc;
                 } completion:^(BOOL finished) {
-                    CGRect rc = self.frame;
-                    rc.origin.x = 0;
-                    self.frame = rc;
                     [self goBack];
-                    
-                    [self historyView].image = nil;
+                    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(resetFrame) userInfo:nil repeats:NO];
                 }];
             }
             else{
@@ -232,5 +228,10 @@
         [originDelegate_ webView:webView didFailLoadWithError:error];
     }
 }
-
+- (void)resetFrame {
+    CGRect rc = self.frame;
+    rc.origin.x = 0;
+    self.frame = rc;
+    [self historyView].image = nil;
+}
 @end
