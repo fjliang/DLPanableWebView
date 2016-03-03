@@ -123,6 +123,12 @@
 
 #pragma mark === gesture===
 - (void)panGesture:(UIPanGestureRecognizer *)sender{
+    
+    CGPoint point = [sender translationInView:self];
+    if (sender.state == UIGestureRecognizerStateBegan && point.x > 50) {
+        return;
+    }
+
     if (![self canGoBack] || historyStack_.count == 0) {
         if (self.panDelegate && [self.panDelegate respondsToSelector:@selector(DLPanableWebView:panPopGesture:)]) {
             [self.panDelegate DLPanableWebView:self panPopGesture:sender];
@@ -131,7 +137,6 @@
         return;
     }
     
-    CGPoint point = [sender translationInView:self];
     if (sender.state == UIGestureRecognizerStateBegan) {
         panStartX_ = point.x;
     }
